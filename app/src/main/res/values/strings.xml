@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Hodite</string>
+    <string name="btn_web_browser">Открыть сайт с помощью браузера</string>
+    <string name="btn_web">sferitus.com/hodite/</string>
+    <string name="btn_web_hodite">hodite.com/brest5.html</string>
+    <string name="btn_push">Получить уведомление</string>
+    <string name="select_city">Выберите город:</string>
+
+    <string-array name="list_cities">
+        <item>Минск</item>
+        <item>Брест</item>
+        <item>Витебск</item>
+        <item>Гомель</item>
+        <item>Гродно</item>
+        <item>Могилёв</item>
+    </string-array>
+
+    <string name="warning_message_internet">Данное приложение может взымать большое количество интернет-трафика! Хотите продолжить?</string>
+</resources>
