@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="83dp"
         android:text="@string/select_city"
-        android:textColor="@color/red"
+        android:textColor="@color/grey"
         android:textSize="40dp"
         android:textStyle="bold" />
 

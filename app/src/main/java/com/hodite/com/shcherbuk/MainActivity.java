@@ -1,8 +1,13 @@
 package com.hodite.com.shcherbuk;
 
+import android.app.ActivityManager;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +29,12 @@ public class MainActivity extends AppCompatActivity implements Constants{
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+
+
+//        if(!isMyServiceRunning(MyService.class)){
+//            startService(new Intent(this,MyService.class));
+//        }
 
         ListView list=(ListView)findViewById(R.id.list_select_city);
         cities=getResources().getStringArray(R.array.list_cities);
@@ -76,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements Constants{
     public void onBackPressed() {
         new AlertDialog.Builder(this)
                 .setTitle("Выход")
-                .setMessage("Ты уверен,что хочешь выйти?")
+                .setMessage("Вы уверены, что хотите выйти?")
                 .setNegativeButton(android.R.string.no, null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -109,4 +120,35 @@ public class MainActivity extends AppCompatActivity implements Constants{
                     }
                 }).create().show();
     }
+
+    /**-----------------------------ПРОВЕРКА НА ЗАПУСК СЕРВИСА--------------------**/
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /*----------------------------------------------------------------------------------*/
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+
 }

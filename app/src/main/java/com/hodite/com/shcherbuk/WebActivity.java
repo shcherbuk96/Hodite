@@ -148,9 +148,9 @@ public class WebActivity extends AppCompatActivity implements Constants{
 
         setContentView(R.layout.activity_web);
 
-        if(!isMyServiceRunning(MyService.class)){
-            startService(new Intent(this,MyService.class));
-        }
+//        if(!isMyServiceRunning(MyService.class)){
+//            startService(new Intent(this,MyService.class));
+//        }
 
         refresh=(ImageView)findViewById(R.id.refresh);
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -207,34 +207,19 @@ public class WebActivity extends AppCompatActivity implements Constants{
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if(!isMyServiceRunning(MyService.class)){
-            startService(new Intent(this,MyService.class));
-        }
-    }
-
-    @Override
     protected void onRestart() {
         super.onRestart();
-        if(!isMyServiceRunning(MyService.class)){
-            startService(new Intent(this,MyService.class));
-        }
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(!isMyServiceRunning(MyService.class)){
-            startService(new Intent(this,MyService.class));
-        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(!isMyServiceRunning(MyService.class)){
-            startService(new Intent(this,MyService.class));
-        }
+
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
     }
 }

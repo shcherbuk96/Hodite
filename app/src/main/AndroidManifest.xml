@@ -22,13 +22,6 @@
             android:name=".WebActivity"
             android:configChanges="orientation|screenSize" />
 
-        <service
-            android:name=".MyService"
-            android:enabled="true"
-            android:exported="false"
-            android:launchMode="singleTop"
-            android:process=":process" />
-
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,11 +35,13 @@
         <activity android:name=".MainActivity"></activity>
 
         <!-- Start the Service if applicable on boot -->
-        <receiver android:name=".AutoStart">
+
+        <service
+            android:name=".MyJobService">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
             </intent-filter>
-        </receiver>
+        </service>
     </application>
 
 </manifest>

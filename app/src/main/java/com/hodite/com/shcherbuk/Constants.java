@@ -27,5 +27,7 @@ public interface Constants {
     public static final String notif_text="notif_text"; // Текст уведомления
     public static final String notif_url="notif_url"; // Ссылка уведомления
 
+    public static final long SERVIC_NOTIFY_INTERVAL = 1 * 10 * 1000; // 10 seconds
+
 
 }

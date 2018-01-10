@@ -4,15 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/bg"
+    android:id="@+id/startLayout"
     tools:context="com.hodite.com.shcherbuk.StartActivity">
 
-    <ImageView
-        android:id="@+id/start_logo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        app:srcCompat="@drawable/logo" />
 
 </RelativeLayout>
