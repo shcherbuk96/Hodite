@@ -7,12 +7,12 @@
     <string name="select_city">Выберите город:</string>
 
     <string-array name="list_cities">
-        <item>Минск</item>
         <item>Брест</item>
-        <item>Витебск</item>
-        <item>Гомель</item>
-        <item>Гродно</item>
-        <item>Могилёв</item>
+        <item>Минск (в разработке)</item>
+        <item>Витебск (в разработке)</item>
+        <item>Гомель (в разработке)</item>
+        <item>Гродно (в разработке)</item>
+        <item>Могилёв (в разработке)</item>
     </string-array>
 
     <string name="warning_message_internet">Данное приложение может взымать большое количество интернет-трафика! Хотите продолжить?</string>

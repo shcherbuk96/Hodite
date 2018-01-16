@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity implements Constants{
                 String strText=textView.getText().toString();
 
                 switch (pos){
-                    case 0://Минск
-                        Toast.makeText(getApplicationContext(),"Данный город отсутствует",Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1://Брест
+                    case 0://Брест
                         //Toast.makeText(getApplicationContext(),cities[pos],Toast.LENGTH_SHORT).show();
                         loadWebActivity(URL_HODITE_COM);
+                        break;
+                    case 1://Минск
+                        Toast.makeText(getApplicationContext(),"Данный город отсутствует",Toast.LENGTH_SHORT).show();
                         break;
                     case 2://Витебск
                         Toast.makeText(getApplicationContext(),"Данный город отсутствует",Toast.LENGTH_SHORT).show();

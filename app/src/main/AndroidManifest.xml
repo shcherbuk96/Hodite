@@ -22,7 +22,8 @@
             android:name=".WebActivity"
             android:configChanges="orientation|screenSize" />
 
-        <activity android:name=".StartActivity">
+        <activity android:name=".StartActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

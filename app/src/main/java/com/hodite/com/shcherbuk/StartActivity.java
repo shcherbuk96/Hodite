@@ -78,7 +78,7 @@ public class StartActivity extends AppCompatActivity implements Constants {
                 setConstraints(Constraint.ON_ANY_NETWORK).
                 setReplaceCurrent(false).build();
         firebaseJobDispatcher.mustSchedule(job);
-        Toast.makeText(getApplicationContext(),"JobSheduled",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"JobSheduled",Toast.LENGTH_SHORT).show();
     }
     private void startApp(){
         new Handler().postDelayed(new Runnable() {
