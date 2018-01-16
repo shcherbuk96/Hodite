@@ -7,7 +7,7 @@ public interface Constants {
     public static final String API_KEY = "AIzaSyABTsN9_n_H5R0vipOim3L3EMXYWXUolk8";
     public static final String VIDEO_ID = "oQiz-lojGP8";
     //TAGS
-    public static final String TAG_MAIN = "MainActivity";
+    public static final String TAG_MAIN = "MainnActivity";
     public static final String TAG_WEB = "WebActivity";
     public static final String TAG_START = "StartActivity";
     public static final String TAG_MYSERVICE = "MyService";
