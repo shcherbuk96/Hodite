@@ -73,12 +73,12 @@ public class StartActivity extends AppCompatActivity implements Constants {
                 setLifetime(Lifetime.FOREVER).
                 setRecurring(true).
                 setTag(JOB_TAG).
-                setTrigger(Trigger.executionWindow(10,10)).
+                setTrigger(Trigger.executionWindow(10,20)).
                 setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL).
                 setConstraints(Constraint.ON_ANY_NETWORK).
                 setReplaceCurrent(false).build();
         firebaseJobDispatcher.mustSchedule(job);
-        //Toast.makeText(getApplicationContext(),"JobSheduled",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"JobSheduled",Toast.LENGTH_SHORT).show();
     }
     private void startApp(){
         new Handler().postDelayed(new Runnable() {
