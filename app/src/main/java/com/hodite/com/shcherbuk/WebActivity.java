@@ -80,7 +80,25 @@ public class WebActivity extends AppCompatActivity implements Constants{
             Log.d(TAG_WEB, "doUpdateVisitedHistory url: " + url + "isReload: "+isReload);
             super.doUpdateVisitedHistory(view, url, isReload);
         }
+
+    @Override
+    public boolean shouldOverrideUrlLoading(XWalkView view, String url) {
+/*        if(url.contains("vk.com")||url.contains("instagram")){
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+
+            return true;
+        }
+
+        return super.shouldOverrideUrlLoading(view, url);*/
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+
+        return true;
     }
+}
 
     class UIClient extends XWalkUIClient {
 

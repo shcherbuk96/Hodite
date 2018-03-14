@@ -3,8 +3,6 @@ package com.hodite.com.shcherbuk;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.job.JobParameters;
-import android.app.job.JobService;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +13,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.firebase.jobdispatcher.Constraint;
+import com.firebase.jobdispatcher.JobParameters;
+import com.firebase.jobdispatcher.JobService;
 
 import java.io.IOException;
 
@@ -35,7 +35,7 @@ import static com.hodite.com.shcherbuk.Constants.notif_url;
  * Created by Администратор on 08.01.2018.
  */
 
-public class MyJobService extends com.firebase.jobdispatcher.JobService implements Constants{
+public class MyJobService extends JobService implements Constants{
     // BackgroundTask backgroundTask;
     NotificationManager nm;
     SharedPreferences sp;
@@ -47,8 +47,7 @@ public class MyJobService extends com.firebase.jobdispatcher.JobService implemen
             .build();
 
     @Override
-    public boolean onStartJob(final com.firebase.jobdispatcher.JobParameters jobParameters) {
-        Toast.makeText(getApplicationContext(),"OnStart",Toast.LENGTH_SHORT).show();
+    public boolean onStartJob(final JobParameters jobParameters) {
         sp = getSharedPreferences(CHECK_SETTINGS,
                 Context.MODE_PRIVATE);
 
@@ -56,6 +55,8 @@ public class MyJobService extends com.firebase.jobdispatcher.JobService implemen
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(),"OnFailure",Toast.LENGTH_SHORT).show();
+                jobFinished(jobParameters,true);
             }
 
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -96,6 +97,7 @@ public class MyJobService extends com.firebase.jobdispatcher.JobService implemen
                         e.commit(); // не забудьте подтвердить изменения
                     }
                     jobFinished(jobParameters,true);
+//                    Toast.makeText(getApplicationContext(),"OnFinished",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -119,6 +121,7 @@ public class MyJobService extends com.firebase.jobdispatcher.JobService implemen
         Notification.Builder builder = new Notification.Builder(this);
 // оставим только самое необходимое
         builder.setContentIntent(pendingIntent)
+                .setWhen(System.currentTimeMillis()) //Время уведомления
                 .setSmallIcon(R.mipmap.ico)
                 .setContentTitle("Hodite")
                 .setContentText(str1); // Текст уведомления

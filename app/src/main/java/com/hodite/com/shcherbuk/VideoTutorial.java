@@ -18,6 +18,8 @@ import com.google.android.youtube.player.YouTubePlayer.PlaybackEventListener;
 import com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 public class VideoTutorial extends YouTubeBaseActivity implements Constants,YouTubePlayer.OnInitializedListener {
 
     YouTubePlayer youTubePlayer;
@@ -32,6 +34,9 @@ public class VideoTutorial extends YouTubeBaseActivity implements Constants,YouT
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_video_tutorial);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("WEB");
+        FirebaseMessaging.getInstance().subscribeToTopic("SHOP");
 
         sp = getSharedPreferences(CHECK_SETTINGS,
                 Context.MODE_PRIVATE);

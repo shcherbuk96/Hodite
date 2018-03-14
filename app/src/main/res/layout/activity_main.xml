@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main_background"
     tools:context="com.hodite.com.shcherbuk.MainActivity">
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp"
         android:text="@string/select_city"
-        android:textColor="@color/grey"
-        android:textSize="40dp"
+        android:gravity="center"
+        android:textColor="@color/main_text"
+        android:textSize="35dp"
         android:textStyle="bold" />
 
     <ListView
         android:id="@+id/list_select_city"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
-        android:layout_marginTop="96dp"
         android:divider="#ada1a1"
         android:dividerHeight="2px" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "9009510434",
+    "firebase_url": "https://androidfinall-a3aec.firebaseio.com",
+    "project_id": "androidfinall-a3aec",
+    "storage_bucket": "androidfinall-a3aec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9009510434:android:4ed57cddab541ead",
+        "android_client_info": {
+          "package_name": "com.hodite.com.shcherbuk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9009510434-gsjg3id4m4rcsnmf5ldd6msh544r4n2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hodite.com.shcherbuk",
+            "certificate_hash": "20d5b98eb6a934227cc3cd7244034d1c90e9b50b"
+          }
+        },
+        {
+          "client_id": "9009510434-gcem7jjn1dcigrtnnu7qepcgij64b04b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFb-RXV9DFS6Qb6Bwxjqn0ymB5QnfMN7U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9009510434-gcem7jjn1dcigrtnnu7qepcgij64b04b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -47,6 +47,8 @@ public class StartActivity extends AppCompatActivity implements Constants {
 
         setContentView(R.layout.activity_start);
 
+
+
         relativeLayout=(RelativeLayout)findViewById(R.id.startLayout);
 
         Animation animRotateIn_icon = AnimationUtils.loadAnimation(this,
@@ -54,41 +56,61 @@ public class StartActivity extends AppCompatActivity implements Constants {
         relativeLayout.startAnimation(animRotateIn_icon);
 
 
-
-//        if(!isMyServiceRunning(MyService.class)){
-//            startService(new Intent(this,MyService.class));
-//        }
-//        Intent alarm = new Intent(getApplicationContext(), AlarmBroadcastReceiver.class);
-
-//        startService(new Intent(this, MyTimerService.class));
-        firebaseJobDispatcher=new FirebaseJobDispatcher(new GooglePlayDriver(this));
-        onStartJob();
-
+//        firebaseJobDispatcher=new FirebaseJobDispatcher(new GooglePlayDriver(this));
+//        onStartJob();
         startApp();
     }
 
     public void onStartJob(){
         Job job=firebaseJobDispatcher.newJobBuilder().
                 setService(MyJobService.class).
-                setLifetime(Lifetime.FOREVER).
                 setRecurring(true).
+                setLifetime(Lifetime.FOREVER).
                 setTag(JOB_TAG).
-                setTrigger(Trigger.executionWindow(10,20)).
-                setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL).
+                setTrigger(Trigger.executionWindow(20,60)).
+                setRetryStrategy(RetryStrategy.DEFAULT_LINEAR).
                 setConstraints(Constraint.ON_ANY_NETWORK).
                 setReplaceCurrent(false).build();
         firebaseJobDispatcher.mustSchedule(job);
-        Toast.makeText(getApplicationContext(),"JobSheduled",Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(getApplicationContext(),"JobSheduled",Toast.LENGTH_SHORT).show();
     }
     private void startApp(){
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
+/*                if(getIntent().getExtras()!=null){
+                    Log.d("Intent++","!null");
+                    Intent intent=new Intent(getApplicationContext(),WebActivity.class);
+                    intent.putExtra(KEY_INTENT,getIntent().getStringExtra("URL"));
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fadein,R.anim.fadeout); //Переход с затуханием
+                }else{
+                    startActivity(new Intent(getApplicationContext(), VideoTutorial.class));
+                    overridePendingTransition(R.anim.fadein,R.anim.fadeout); //Переход с затуханием
+                }*/
 
-                startActivity(new Intent(getApplicationContext(), VideoTutorial.class));
-                overridePendingTransition(R.anim.fadein,R.anim.fadeout); //Переход с затуханием
-                finish();
+                if(getIntent()!=null) {
+                    Log.d("Intent","!=null");
+                    if(getIntent().getStringExtra("URL")==null){
+                        Log.d("extras","=null");
+                        startActivity(new Intent(getApplicationContext(), VideoTutorial.class));
+                        overridePendingTransition(R.anim.fadein,R.anim.fadeout); //Переход с затуханием
+                    }
+                    else if (getIntent().getStringExtra("URL")!=null){
+                        Log.d("extras", String.valueOf(getIntent().getExtras()));
+                        Intent intent = new Intent(getApplicationContext(), WebActivity.class);
+                        intent.putExtra(KEY_INTENT, getIntent().getStringExtra("URL"));
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fadein,R.anim.fadeout); //Переход с затуханием
+                    }
+
+                }else if(getIntent()==null) {
+                    Log.d("Intent","=null");
+                    startActivity(new Intent(getApplicationContext(), VideoTutorial.class));
+                    overridePendingTransition(R.anim.fadein,R.anim.fadeout); //Переход с затуханием
+                }
 
             }
         }, 3*1000);
