@@ -6,15 +6,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
+import com.hodite.com.shcherbuk.WebActivity.WebActivity;
 
 import java.io.IOException;
 
@@ -25,10 +24,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
-import static com.hodite.com.shcherbuk.Constants.CHECK_SETTINGS;
-import static com.hodite.com.shcherbuk.Constants.notif_text;
-import static com.hodite.com.shcherbuk.Constants.notif_url;
 
 
 /**
