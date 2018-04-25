@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
 
-//                final TextView textView = (TextView) view;
-//                final String strText = textView.getText().toString();
-
                 switch (pos) {
                     case 0://Брест
                         //Toast.makeText(getApplicationContext(),cities[pos],Toast.LENGTH_SHORT).show();

@@ -16,7 +16,7 @@ public interface Constants {
     public static final int NOTIFICATION_KEY = 1;
     public static final int NOTIFY_ID = 101;
 
-
+    public static final int WAIT = 2000;
     /*НАСТРОЙКИ+СОХРАНЕНИЕ ИНФЫ*/
     public static final String CHECK_SETTINGS = "check_settings"; //Имя файла
     //Обучение

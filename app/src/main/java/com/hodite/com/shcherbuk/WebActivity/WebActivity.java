@@ -1,8 +1,11 @@
 package com.hodite.com.shcherbuk.WebActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,16 +29,13 @@ public class WebActivity extends AppCompatActivity implements Constants {
     private XWalkView web;
     private String url;
     private ImageView refresh;
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
-        /**Растянуть окно на весь экран**/
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_web);
 
@@ -53,25 +53,31 @@ public class WebActivity extends AppCompatActivity implements Constants {
     }
 
     public void loadWeb() {
-
-
-        //Intent intent=getIntent();
         url = getIntent().getStringExtra(KEY_INTENT);
-
         web = findViewById(R.id.web_xwalkview);
         web.setResourceClient(new ResourceClient(web));
         web.setUIClient(new UIClient(web));
         web.clearCache(true);
         web.load(url, null);
-        //progressBar.setVisibility(ProgressBar.INVISIBLE);
-
     }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout); //Переход с затуханием
-        finish();
+        new AlertDialog.Builder(this)
+                .setTitle("Выход")
+                .setMessage("Вы уверены, что хотите выйти?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(final DialogInterface arg0, final int arg1) {
+                        //эмулируем нажатие на HOME, сворачивая приложение
+                        final Intent i = new Intent(Intent.ACTION_MAIN);
+                        i.addCategory(Intent.CATEGORY_HOME);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+
+                    }
+                }).create().show();
     }
 
     /**

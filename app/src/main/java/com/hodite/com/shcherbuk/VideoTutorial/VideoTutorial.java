@@ -57,17 +57,17 @@ public class VideoTutorial extends YouTubeBaseActivity implements Constants,YouT
             e.putBoolean(hasWathed, true);
             e.commit(); // не забудьте подтвердить изменения
         }
-        else{
-            ActivityManager.startMainActivity(context);
+/*        else{
+            ActivityManager.startWebActivity(context,Constants.URL_HODITE_COM);
             finish();
-        }
-
-
+        }*/
     }
+
     @Override
     public void onInitializationFailure(final Provider provider, final YouTubeInitializationResult result) {
         Toast.makeText(this, "Произошла ошибка!", Toast.LENGTH_LONG).show();
     }
+
     @Override
     public void onInitializationSuccess(final Provider provider, final YouTubePlayer player, final boolean wasRestored) {
         youTubePlayer=player;
@@ -118,7 +118,7 @@ public class VideoTutorial extends YouTubeBaseActivity implements Constants,YouT
             e.putBoolean(hasWathed, true);
             e.commit(); // не забудьте подтвердить изменения
 
-            ActivityManager.startMainActivity(context);
+            ActivityManager.startWebActivity(context,Constants.URL_HODITE_COM);
             finish();
         }
         @Override
@@ -147,7 +147,7 @@ public class VideoTutorial extends YouTubeBaseActivity implements Constants,YouT
                         e.putBoolean(hasWathed, true);
                         e.commit(); // не забудьте подтвердить изменения
 
-                        ActivityManager.startMainActivity(context);
+                        ActivityManager.startWebActivity(context,Constants.URL_HODITE_COM);
                         finish();
 
                     }

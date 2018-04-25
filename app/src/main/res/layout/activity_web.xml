@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.xwalk.core.XWalkView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true"
     android:background="@color/black"
-    android:id="@+id/web_xwalkview"
     tools:context="com.hodite.com.shcherbuk.WebActivity.WebActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/refresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/refresh" />
-</org.xwalk.core.XWalkView>
+        <org.xwalk.core.XWalkView
+            android:id="@+id/web_xwalkview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:background="@color/black"
+            android:keepScreenOn="true">
+
+        </org.xwalk.core.XWalkView>
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/refresh" />
+
+        <ImageView
+            android:id="@+id/set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/ic_settings" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
