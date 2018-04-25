@@ -5,12 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
 import android.webkit.ValueCallback;
 import android.webkit.WebResourceResponse;
 import android.widget.ImageView;
@@ -29,6 +31,7 @@ public class WebActivity extends AppCompatActivity implements Constants {
     private XWalkView web;
     private String url;
     private ImageView refresh;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
@@ -48,9 +51,38 @@ public class WebActivity extends AppCompatActivity implements Constants {
             }
         });
 
+
         loadWeb();
 
+
+
     }
+
+    // slide the view from below itself to the current position
+    public void slideUp(View view){
+        view.setVisibility(View.VISIBLE);
+        TranslateAnimation animate = new TranslateAnimation(
+                0,                 // fromXDelta
+                0,                 // toXDelta
+                view.getHeight(),  // fromYDelta
+                0);                // toYDelta
+        animate.setDuration(56);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
+    // slide the view from its current position to below itself
+    public void slideDown(View view){
+        TranslateAnimation animate = new TranslateAnimation(
+                0,                 // fromXDelta
+                0,                 // toXDelta
+                0,                 // fromYDelta
+                view.getHeight()); // toYDelta
+        animate.setDuration(56);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+    }
+
 
     public void loadWeb() {
         url = getIntent().getStringExtra(KEY_INTENT);
