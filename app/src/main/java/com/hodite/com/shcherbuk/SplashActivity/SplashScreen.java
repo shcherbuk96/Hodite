@@ -45,6 +45,9 @@ public class SplashScreen extends AppCompatActivity implements Constants {
                 final SharedPreferences.Editor e = sp.edit();
                 e.putBoolean(hasWathed, true);
                 e.commit(); // не забудьте подтвердить изменения
+
+                ActivityManager.startWebActivity(this, Constants.URL_HODITE_COM);
+                finish();
 //                    ActivityManager.startVideoTutorial(this);
 //                    finish();
             }

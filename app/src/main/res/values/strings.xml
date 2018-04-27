@@ -17,5 +17,8 @@
 
     <string name="warning_message_internet">Данное приложение может взымать большое количество интернет-трафика! Хотите продолжить?</string>
 
-    <string name="settings">Настройки</string>
+
+    <string name="settings">Settings</string>
+    <string name="rating">Rating</string>
+    <string name="comment">FeedBack</string>
 </resources>
