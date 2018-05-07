@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/main_background"
-    tools:context="com.hodite.com.shcherbuk.MainActivity">
+    tools:context="com.hodite.com.shcherbuk.MainActivity.MainActivity">
 
     <TextView
         android:id="@+id/textView3"
