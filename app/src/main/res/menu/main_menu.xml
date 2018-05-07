@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/rating"
-        android:orderInCategory="100"
-        android:title="@string/rating"
-        android:icon="@drawable/rating"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/feedback"
         android:orderInCategory="100"
         android:title="@string/comment"

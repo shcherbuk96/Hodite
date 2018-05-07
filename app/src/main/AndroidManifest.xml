@@ -31,26 +31,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".VideoTutorial.VideoTutorial"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".MainActivity.MainActivity"
-            android:theme="@style/MainTheme" />
 
         <!-- Start the Service if applicable on boot -->
 
-        <!--<service android:name=".MyJobService">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />-->
-            <!--</intent-filter>-->
-        <!--</service>-->
+
+        <!-- <service android:name=".MyJobService"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <service android:name=".FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".Settings.SettingsActivity" />
     </application>
 
 </manifest>

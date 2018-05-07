@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -23,20 +24,20 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.hodite.com.shcherbuk.ActivityManager;
 import com.hodite.com.shcherbuk.Constants;
 import com.hodite.com.shcherbuk.R;
+import com.kobakei.ratethisapp.RateThisApp;
 
 import org.xwalk.core.XWalkJavascriptResult;
 import org.xwalk.core.XWalkResourceClient;
 import org.xwalk.core.XWalkUIClient;
 import org.xwalk.core.XWalkView;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class WebActivity extends AppCompatActivity implements Constants {
+public class WebActivity extends AppCompatActivity implements Constants, SharedPreferences.OnSharedPreferenceChangeListener {
     BottomNavigationView bottomNavigationView;
     EditText etFeedback;
+    EditText etSubject;
     Button btnSubmit;
     private XWalkView web;
     private String url;
@@ -53,9 +54,19 @@ public class WebActivity extends AppCompatActivity implements Constants {
 
         setContentView(R.layout.activity_web);
 
+        // Monitor launch times and interval from installation
+        RateThisApp.onCreate(this);
+        // If the condition is satisfied, "Rate this app" dialog will be shown
+        RateThisApp.showRateDialogIfNeeded(this);
+
+        // Регистрируем этот OnSharedPreferenceChangeListener
+        Context context = getApplicationContext();
+        SharedPreferences prefs =
+                PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.registerOnSharedPreferenceChangeListener(this);
 
         bottomNavigationView = findViewById(R.id.main_navigation_bottom_navigation_view);
-        bottomNavigationView.getMenu().getItem(2).setChecked(true);
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
         refresh = findViewById(R.id.refresh);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,13 +85,9 @@ public class WebActivity extends AppCompatActivity implements Constants {
                         //feedBackThisApp();
                         feedBackAlertDialog();
                         break;
-                    case R.id.rating:
-                        rateThisApp();
-
-                        break;
                     case R.id.settings:
-                        settingsThisApp();
-
+//                        settingsThisApp();
+                        ActivityManager.startSettingsActivity(bottomNavigationView.getContext());
                         break;
                 }
 
@@ -109,7 +116,9 @@ public class WebActivity extends AppCompatActivity implements Constants {
         LayoutInflater inflater = this.getLayoutInflater();
         dialog.setView(inflater.inflate(R.layout.feedback, null));
         dialog.show();
+
         etFeedback = dialog.findViewById(R.id.etFeedback);
+        etSubject = dialog.findViewById(R.id.etEmail);
         btnSubmit = dialog.findViewById(R.id.btnSubmit);
 
 
@@ -117,81 +126,20 @@ public class WebActivity extends AppCompatActivity implements Constants {
             @Override
             public void onClick(final View v) {
                 if (!etFeedback.getText().toString().isEmpty()) {
-                    feedBackThisApp(etFeedback.getText().toString());
+                    feedBackThisApp(etFeedback.getText().toString(), etSubject.getText().toString());
                 } else
                     Toast.makeText(getApplicationContext(), "Напишите отзыв", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void feedBackThisApp(String text) {
-        final Intent feedback = new Intent(android.content.Intent.ACTION_SEND);
-        feedback.setType("text/html");
-        feedback.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"evgenus196@gmail.com"});
-        feedback.putExtra(android.content.Intent.EXTRA_SUBJECT, "shcherbuk96@mail.ru");
+    private void feedBackThisApp(String text, String subject) {
+        final Intent feedback = new Intent(Intent.ACTION_SEND);
+        feedback.setType("text/plain");
+        feedback.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"hodite.com@gmail.com"});
+        feedback.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
         feedback.putExtra(android.content.Intent.EXTRA_TEXT, text);
-        startActivity(Intent.createChooser(feedback, "FeedBack"));
-    }
-
-    private void settingsThisApp() {
-        final String[] items = {" Получать уведомления об обновлениях сайта ", " Получать уведомления об акциях магазинов "};
-
-        final List<String> colorsList = Arrays.asList(items);
-
-        sp = getSharedPreferences(CHECK_SETTINGS,
-                Context.MODE_PRIVATE);
-
-        final boolean webSite = sp.getBoolean(notifWebSite, true);
-        final boolean shops = sp.getBoolean(notifShops, true);
-
-        mCheckedItems = new boolean[]{webSite, shops};
-
-
-        final AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Настройки")
-                .setMultiChoiceItems(items, mCheckedItems, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int indexSelected, final boolean isChecked) {
-                        mCheckedItems[indexSelected] = isChecked;
-                    }
-                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        final SharedPreferences.Editor e = sp.edit();
-                        e.putBoolean(notifWebSite, mCheckedItems[0]);
-                        e.putBoolean(notifShops, mCheckedItems[1]);
-                        e.commit(); // не забудьте подтвердить изменения
-
-                        if (mCheckedItems[0]) {
-                            FirebaseMessaging.getInstance().subscribeToTopic("WEB");
-                        } else {
-                            FirebaseMessaging.getInstance().unsubscribeFromTopic("WEB");
-                        }
-
-                        if (mCheckedItems[1]) {
-                            FirebaseMessaging.getInstance().subscribeToTopic("SHOP");
-                        } else {
-                            FirebaseMessaging.getInstance().unsubscribeFromTopic("SHOP");
-                        }
-
-                    }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        //  Your code when user clicked on Cancel
-                        dialog.cancel();
-                    }
-                }).create();
-        dialog.show();
-    }
-
-    private void rateThisApp() {
-        final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-        } catch (android.content.ActivityNotFoundException anfe) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-        }
+        startActivity(Intent.createChooser(feedback, "Выберите email клиент :"));
     }
 
     @Override
@@ -211,6 +159,33 @@ public class WebActivity extends AppCompatActivity implements Constants {
 
                     }
                 }).create().show();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String key) {
+        if (key.equals("settings_website")) {
+            if (sharedPreferences.getBoolean(key, true)) {
+                FirebaseMessaging.getInstance().subscribeToTopic("WEB");
+
+                Log.e(key, "true");
+            } else {
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("WEB");
+
+                Log.e(key, "false");
+            }
+        }
+
+        if (key.equals("settings_shop")) {
+            if (sharedPreferences.getBoolean(key, true)) {
+                FirebaseMessaging.getInstance().subscribeToTopic("SHOP");
+
+                Log.e(key, "true");
+            } else {
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("SHOP");
+
+                Log.e(key, "false");
+            }
+        }
     }
 
     /**

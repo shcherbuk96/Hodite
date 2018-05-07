@@ -11,4 +11,7 @@
 
     <color name="main_text">#426379</color>
     <color name="main_background">#2d363d</color>
+
+    <color name="button_active">#b5f4ff</color>
+    <color name="button_not_active">#416278</color>
 </resources>

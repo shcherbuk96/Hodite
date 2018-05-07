@@ -3,6 +3,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="top"
+        android:hint="Subject"
+        android:lines="1" />
+
+    <EditText
         android:id="@+id/etFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#e57373"
+        android:background="@drawable/bg_button"
         android:text="Send feedback"
         android:textColor="@android:color/white" />
 </LinearLayout>

@@ -5,14 +5,14 @@
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/main_background"
     tools:context="com.hodite.com.shcherbuk.WebActivity.WebActivity">
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_navigation_bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/main_background"
         app:itemIconTint="@color/nav_color_list"
         app:itemTextColor="@color/nav_color_list"
         app:menu="@menu/main_menu"/>

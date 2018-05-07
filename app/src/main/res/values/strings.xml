@@ -18,7 +18,17 @@
     <string name="warning_message_internet">Данное приложение может взымать большое количество интернет-трафика! Хотите продолжить?</string>
 
 
-    <string name="settings">Settings</string>
-    <string name="rating">Rating</string>
-    <string name="comment">FeedBack</string>
+    <string name="settings">Настройки</string>
+    <string name="comment">Отзыв</string>
+
+    <string name="settings_website">Уведомления сайта</string>
+    <string name="settings_shop">Уведомления магазинов</string>
+    <string name="settings_summary_website">Получать уведомления об обновлениях сайта</string>
+    <string name="settings_summary_shop">Получать уведомления об акциях магазинов</string>
+
+    <string name="rate_title">Нравится Hodite?</string>
+    <string name="rate_message">Вам нравится пользоваться этим приложением? Оцените приложение.</string>
+    <string name="rate_yes">Оценить Hodite</string>
+    <string name="rate_later">Позже</string>
+    <string name="rate_no">Нет, спасибо</string>
 </resources>
