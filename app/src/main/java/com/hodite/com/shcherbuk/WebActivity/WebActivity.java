@@ -110,7 +110,7 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
     private void feedBackAlertDialog() {
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("FeedBack")
+                .setTitle("Отзыв")
                 .create();
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -121,6 +121,30 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         etSubject = dialog.findViewById(R.id.etEmail);
         btnSubmit = dialog.findViewById(R.id.btnSubmit);
 
+        ImageView vk=dialog.findViewById(R.id.vk);
+        final ImageView youtube=dialog.findViewById(R.id.youtube);
+        ImageView instagram=dialog.findViewById(R.id.instagram);
+
+        vk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                socialNetwork(vkUrl);
+            }
+        });
+
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                socialNetwork(youtubeUrl);
+            }
+        });
+
+        instagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                socialNetwork(instagramUrl);
+            }
+        });
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +164,17 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         feedback.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
         feedback.putExtra(android.content.Intent.EXTRA_TEXT, text);
         startActivity(Intent.createChooser(feedback, "Выберите email клиент :"));
+    }
+
+    private void socialNetwork(String url){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this,"Что-то пошло не по плану", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

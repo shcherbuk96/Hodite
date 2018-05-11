@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <EditText
@@ -8,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="top"
-        android:hint="Subject"
+        android:hint="Тема сообщения"
         android:lines="1" />
 
     <EditText
@@ -18,16 +19,59 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:gravity="top"
-        android:hint="Tell us what you loved"
+        android:hint="Ваше сообщение"
         android:inputType="textMultiLine"
         android:lines="5" />
 
     <Button
         android:id="@+id/btnSubmit"
+        android:layout_marginLeft="@dimen/margin_padding_size_small"
+        android:layout_marginRight="@dimen/margin_padding_size_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_button"
-        android:text="Send feedback"
+        android:text="Отправить"
         android:textColor="@android:color/white" />
+
+    <TextView
+        android:paddingTop="@dimen/margin_padding_size_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Мы в социальных сетях"/>
+    <GridLayout
+        android:paddingTop="@dimen/margin_padding_size_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:useDefaultMargins="true">
+
+        <ImageView
+            android:layout_columnWeight="1"
+            android:id="@+id/vk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/vk"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:layout_columnWeight="1"
+            android:id="@+id/instagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/instagram"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:layout_columnWeight="1"
+            android:id="@+id/youtube"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/youtube"
+            android:layout_gravity="center"/>
+
+    </GridLayout>
 </LinearLayout>
