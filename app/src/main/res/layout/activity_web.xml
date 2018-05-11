@@ -17,14 +17,11 @@
         app:itemTextColor="@color/nav_color_list"
         app:menu="@menu/main_menu"/>
 
-    <org.xwalk.core.XWalkView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <org.xwalk.core.XWalkView
         android:id="@+id/web_xwalkview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/main_navigation_bottom_navigation_view"
-        android:background="@color/black">
+        android:layout_above="@+id/main_navigation_bottom_navigation_view">
 
         <ImageView
             android:id="@+id/refresh"
