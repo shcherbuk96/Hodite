@@ -4,22 +4,12 @@
     <string name="btn_web">sferitus.com/hodite/</string>
     <string name="btn_web_hodite">hodite.com/brest5.html</string>
     <string name="btn_push">Получить уведомление</string>
-    <string name="select_city">Выберите город:</string>
-
-    <string-array name="list_cities">
-        <item>Брест</item>
-        <item>Минск (в разработке)</item>
-        <item>Витебск (в разработке)</item>
-        <item>Гомель (в разработке)</item>
-        <item>Гродно (в разработке)</item>
-        <item>Могилёв (в разработке)</item>
-    </string-array>
 
     <string name="warning_message_internet">Данное приложение может взымать большое количество интернет-трафика! Хотите продолжить?</string>
 
-
     <string name="settings">Настройки</string>
     <string name="comment">Обратная связь</string>
+    <string name="search">Поиск</string>
 
     <string name="settings_website">Уведомления сайта</string>
     <string name="settings_shop">Уведомления магазинов</string>
@@ -31,4 +21,7 @@
     <string name="rate_yes">Оценить Hodite</string>
     <string name="rate_later">Позже</string>
     <string name="rate_no">Нет, спасибо</string>
+
+    <string name="search_dialog_hint">Введите запрос</string>
+    <string name="search_dialog_button">Найти</string>
 </resources>

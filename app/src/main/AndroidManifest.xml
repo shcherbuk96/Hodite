@@ -21,6 +21,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".WebActivity.WebActivity"
+            android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".SplashActivity.SplashScreen"

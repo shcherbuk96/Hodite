@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/main_background"
     tools:context="com.hodite.com.shcherbuk.WebActivity.WebActivity">
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_navigation_bottom_navigation_view"
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
         android:background="@color/main_background"
         app:itemIconTint="@color/nav_color_list"
         app:itemTextColor="@color/nav_color_list"
-        app:menu="@menu/main_menu"/>
+        app:menu="@menu/main_menu" />
 
     <org.xwalk.core.XWalkView
         android:id="@+id/web_xwalkview"

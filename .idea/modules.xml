@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidFinall.iml" filepath="$PROJECT_DIR$/AndroidFinall.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hodite.iml" filepath="$PROJECT_DIR$/Hodite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/HoditeApp.iml" filepath="$PROJECT_DIR$/.idea/HoditeApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

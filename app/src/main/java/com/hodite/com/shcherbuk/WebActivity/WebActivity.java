@@ -42,8 +42,6 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
     private XWalkView web;
     private String url;
     private ImageView refresh;
-    private SharedPreferences sp;
-    private boolean[] mCheckedItems;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -53,11 +51,12 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_web);
-
         // Monitor launch times and interval from installation
         RateThisApp.onCreate(this);
         // If the condition is satisfied, "Rate this app" dialog will be shown
         RateThisApp.showRateDialogIfNeeded(this);
+
+        initWeb();
 
         // Регистрируем этот OnSharedPreferenceChangeListener
         Context context = getApplicationContext();
@@ -68,6 +67,7 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         bottomNavigationView = findViewById(R.id.main_navigation_bottom_navigation_view);
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
         refresh = findViewById(R.id.refresh);
+
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -82,28 +82,38 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
 
                 switch (item.getItemId()) {
                     case R.id.feedback:
-                        //feedBackThisApp();
                         feedBackAlertDialog();
+
                         break;
+
                     case R.id.settings:
-//                        settingsThisApp();
                         ActivityManager.startSettingsActivity(bottomNavigationView.getContext());
+
+                        break;
+
+                    case R.id.search:
+                        searchAlertDialog();
+
                         break;
                 }
 
                 return true;
             }
         });
+
         loadWeb();
 
     }
 
-    public void loadWeb() {
-        url = getIntent().getStringExtra(KEY_INTENT);
+    public void initWeb() {
         web = findViewById(R.id.web_xwalkview);
         web.setResourceClient(new ResourceClient(web));
         web.setUIClient(new UIClient(web));
         web.clearCache(true);
+    }
+
+    public void loadWeb() {
+        url = getIntent().getStringExtra(KEY_INTENT);
         web.load(url, null);
     }
 
@@ -121,9 +131,9 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         etSubject = dialog.findViewById(R.id.etEmail);
         btnSubmit = dialog.findViewById(R.id.btnSubmit);
 
-        ImageView vk=dialog.findViewById(R.id.vk);
-        final ImageView youtube=dialog.findViewById(R.id.youtube);
-        ImageView instagram=dialog.findViewById(R.id.instagram);
+        final ImageView vk = dialog.findViewById(R.id.vk);
+        final ImageView youtube = dialog.findViewById(R.id.youtube);
+        final ImageView instagram = dialog.findViewById(R.id.instagram);
 
         vk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +167,34 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         });
     }
 
+    private void searchAlertDialog() {
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Поиск")
+                .create();
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialog.setView(inflater.inflate(R.layout.search_dialog, null));
+        dialog.show();
+
+        final EditText etSearch = dialog.findViewById(R.id.search_dialog_edit_text);
+        Button find = dialog.findViewById(R.id.search_dialog_find_btn);
+
+        find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                String text = etSearch.getText().toString();
+
+                if (!text.isEmpty()) {
+                    url = "http://hodite.com/search.php?s=" + text;
+                    web.hasEnteredFullscreen();
+                    web.load(url, null);
+
+                    dialog.dismiss();
+                }
+            }
+        });
+    }
+
     private void feedBackThisApp(String text, String subject) {
         final Intent feedback = new Intent(Intent.ACTION_SEND);
         feedback.setType("text/plain");
@@ -166,14 +204,14 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         startActivity(Intent.createChooser(feedback, "Выберите email клиент :"));
     }
 
-    private void socialNetwork(String url){
+    private void socialNetwork(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Toast.makeText(this,"Что-то пошло не по плану", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Что-то пошло не по плану", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -288,11 +326,15 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         }
 
         return super.shouldOverrideUrlLoading(view, url);*/
-            final Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            startActivity(i);
+            if (!url.contains("hodite")) {
+                final Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
 
-            return true;
+                return true;
+            }
+
+            return super.shouldOverrideUrlLoading(view, url);
         }
     }
 

@@ -48,8 +48,6 @@ public class SplashScreen extends AppCompatActivity implements Constants {
 
                 ActivityManager.startWebActivity(this, Constants.URL_HODITE_COM);
                 finish();
-//                    ActivityManager.startVideoTutorial(this);
-//                    finish();
             }
 
         } else if (getIntent().getStringExtra("URL") != null) {

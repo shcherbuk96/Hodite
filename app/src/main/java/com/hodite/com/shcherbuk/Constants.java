@@ -31,7 +31,7 @@ public interface Constants {
 
     public static final long SERVIC_NOTIFY_INTERVAL = 1 * 10 * 1000; // 10 seconds
 
-    String vkUrl="https://vk.com/hodite";
-    String instagramUrl="https://www.instagram.com/hodite_com/";
-    String youtubeUrl="https://www.youtube.com/channel/UCLbVj3u1NYj045AuBpHIfyw";
+    String vkUrl = "https://vk.com/hodite";
+    String instagramUrl = "https://www.instagram.com/hodite_com/";
+    String youtubeUrl = "https://www.youtube.com/channel/UCLbVj3u1NYj045AuBpHIfyw";
 }
