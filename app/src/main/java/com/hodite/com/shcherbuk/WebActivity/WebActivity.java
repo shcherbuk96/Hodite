@@ -49,15 +49,12 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_web);
         // Monitor launch times and interval from installation
         RateThisApp.onCreate(this);
         // If the condition is satisfied, "Rate this app" dialog will be shown
         RateThisApp.showRateDialogIfNeeded(this);
-
         initWeb();
-
         // Регистрируем этот OnSharedPreferenceChangeListener
         Context context = getApplicationContext();
         SharedPreferences prefs =
@@ -102,7 +99,6 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         });
 
         loadWeb();
-
     }
 
     public void initWeb() {
@@ -120,7 +116,7 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
     private void feedBackAlertDialog() {
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Отзыв")
+                .setTitle(getResources().getString(R.string.feedback_title))
                 .create();
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -162,14 +158,14 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
                 if (!etFeedback.getText().toString().isEmpty()) {
                     feedBackThisApp(etFeedback.getText().toString(), etSubject.getText().toString());
                 } else
-                    Toast.makeText(getApplicationContext(), "Напишите отзыв", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.feedback_toast), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void searchAlertDialog() {
         final AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Поиск")
+                .setTitle(getResources().getString(R.string.search_title))
                 .create();
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -185,7 +181,7 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
                 String text = etSearch.getText().toString();
 
                 if (!text.isEmpty()) {
-                    url = "http://hodite.com/search.php?s=" + text;
+                    url = searchDeialogUrl + text;
                     web.hasEnteredFullscreen();
                     web.load(url, null);
 
@@ -198,10 +194,10 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
     private void feedBackThisApp(String text, String subject) {
         final Intent feedback = new Intent(Intent.ACTION_SEND);
         feedback.setType("text/plain");
-        feedback.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"hodite.com@gmail.com"});
+        feedback.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{hoditeEmail});
         feedback.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
         feedback.putExtra(android.content.Intent.EXTRA_TEXT, text);
-        startActivity(Intent.createChooser(feedback, "Выберите email клиент :"));
+        startActivity(Intent.createChooser(feedback, getResources().getString(R.string.feedback_email_client)));
     }
 
     private void socialNetwork(String url) {
@@ -211,15 +207,15 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Что-то пошло не по плану", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setTitle("Выход")
-                .setMessage("Вы уверены, что хотите выйти?")
+                .setTitle(getResources().getString(R.string.exit_title))
+                .setMessage(getResources().getString(R.string.exit_warning))
                 .setNegativeButton(android.R.string.no, null)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 

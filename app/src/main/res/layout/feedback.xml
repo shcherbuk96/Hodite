@@ -10,8 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/margin_padding_size_medium"
+        android:layout_marginRight="@dimen/margin_padding_size_medium"
         android:gravity="top"
-        android:hint="Тема сообщения"
+        android:hint="@string/feedback_theme_hint"
         android:lines="1" />
 
     <EditText
@@ -19,9 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/margin_padding_size_medium"
+        android:layout_marginRight="@dimen/margin_padding_size_medium"
         android:ems="10"
         android:gravity="top"
-        android:hint="Ваше сообщение"
+        android:hint="@string/feedback_message_hint"
         android:inputType="textMultiLine"
         android:lines="5" />
 
@@ -29,11 +33,11 @@
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_padding_size_small"
-        android:layout_marginRight="@dimen/margin_padding_size_small"
+        android:layout_marginLeft="@dimen/margin_padding_size_medium"
+        android:layout_marginRight="@dimen/margin_padding_size_medium"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_button"
-        android:text="Отправить"
+        android:text="@string/feedback_btn"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -41,7 +45,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="@dimen/margin_padding_size_small"
-        android:text="Мы в социальных сетях" />
+        android:text="@string/feedback_social" />
 
     <GridLayout
         android:layout_width="match_parent"
