@@ -16,7 +16,7 @@
     <string name="rate_later">Позже</string>
     <string name="rate_no">Нет, спасибо</string>
 
-    <string name="search_dialog_hint">Введите запрос</string>
+    <string name="search_dialog_hint">Ваш запрос</string>
     <string name="search_dialog_button">Найти</string>
 
     <string name="feedback_title">Отзыв</string>
@@ -30,7 +30,14 @@
     <string name="error">Что-то пошло не по плану</string>
     <string name="exit_title">Выход</string>
     <string name="exit_warning">Вы уверены, что хотите выйти?</string>
+    <string name="exit_double_tap">Пожалуйста, нажмите ещё раз для выхода</string>
 
     <string name="search_title">Поиск</string>
     <string name="search_btn">Поиск</string>
+
+    <string name="internet_connection">Проверьте подключение к интернету</string>
+
+    <string name="err_feedback_message">Введите сообщение</string>
+    <string name="err_feedback_theme">Введите тему сообщения</string>
+    <string name="err_search_query">Введите запрос</string>
 </resources>

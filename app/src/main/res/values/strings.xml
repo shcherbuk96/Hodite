@@ -16,7 +16,7 @@
     <string name="rate_later">Later</string>
     <string name="rate_no">No, thanks</string>
 
-    <string name="search_dialog_hint">Type a query</string>
+    <string name="search_dialog_hint">Your query</string>
     <string name="search_dialog_button">Search</string>
 
     <string name="feedback_title">Feedback</string>
@@ -30,8 +30,14 @@
     <string name="error">Something is wrong</string>
     <string name="exit_title">Exit</string>
     <string name="exit_warning">Are you sure you want to get out?</string>
+    <string name="exit_double_tap">Please click "Back" again to exit</string>
 
     <string name="search_title">Search</string>
     <string name="search_btn">Search</string>
 
+    <string name="internet_connection">Check internet connection</string>
+
+    <string name="err_feedback_message">Enter your message</string>
+    <string name="err_feedback_theme">Enter message topic</string>
+    <string name="err_search_query">Type a query</string>
 </resources>

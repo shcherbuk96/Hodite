@@ -2,26 +2,30 @@ package com.hodite.com.shcherbuk.WebActivity;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebResourceResponse;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.hodite.com.shcherbuk.ActivityManager;
@@ -39,6 +43,7 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
     EditText etFeedback;
     EditText etSubject;
     Button btnSubmit;
+    boolean doubleBackToExitPressedOnce = false;
     private XWalkView web;
     private String url;
     private ImageView refresh;
@@ -124,12 +129,57 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         dialog.show();
 
         etFeedback = dialog.findViewById(R.id.etFeedback);
-        etSubject = dialog.findViewById(R.id.etEmail);
+        etSubject = dialog.findViewById(R.id.etTopic);
         btnSubmit = dialog.findViewById(R.id.btnSubmit);
+
+        final TextInputLayout etFeedbackLayout = dialog.findViewById(R.id.etFeedbackLayout);
+        final TextInputLayout etTopicLayout = dialog.findViewById(R.id.etTopicLayout);
 
         final ImageView vk = dialog.findViewById(R.id.vk);
         final ImageView youtube = dialog.findViewById(R.id.youtube);
         final ImageView instagram = dialog.findViewById(R.id.instagram);
+
+        etFeedback.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                if (s.toString().trim().isEmpty()) {
+                    etFeedbackLayout.setError(getString(R.string.err_feedback_message));
+                } else {
+                    etFeedbackLayout.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(final Editable s) {
+
+            }
+        });
+
+        etSubject.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                if (s.toString().trim().isEmpty()) {
+                    etTopicLayout.setError(getString(R.string.err_feedback_theme));
+                } else {
+                    etTopicLayout.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(final Editable s) {
+
+            }
+        });
 
         vk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,10 +205,19 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if (!etFeedback.getText().toString().isEmpty()) {
+                if (etFeedback.getText().toString().trim().isEmpty()) {
+                    etFeedbackLayout.setError(getString(R.string.err_feedback_message));
+                    //requestFocus(etFeedback);
+                }
+
+                if (etSubject.getText().toString().trim().isEmpty()) {
+                    etTopicLayout.setError(getString(R.string.err_feedback_theme));
+                    //requestFocus(etSubject);
+                }
+
+                if (!etFeedback.getText().toString().trim().isEmpty() && !etSubject.getText().toString().trim().isEmpty()) {
                     feedBackThisApp(etFeedback.getText().toString(), etSubject.getText().toString());
-                } else
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.feedback_toast), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -172,23 +231,53 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         dialog.setView(inflater.inflate(R.layout.search_dialog, null));
         dialog.show();
 
+        final TextInputLayout etSearchLayout = dialog.findViewById(R.id.search_dialog_edit_text_layout);
         final EditText etSearch = dialog.findViewById(R.id.search_dialog_edit_text);
         Button find = dialog.findViewById(R.id.search_dialog_find_btn);
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                if (s.toString().trim().isEmpty()) {
+                    etSearchLayout.setError(getString(R.string.err_search_query));
+                } else {
+                    etSearchLayout.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(final Editable s) {
+
+            }
+        });
 
         find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 String text = etSearch.getText().toString();
 
-                if (!text.isEmpty()) {
+                if (text.trim().isEmpty()) {
+                    etSearchLayout.setError(getString(R.string.err_search_query));
+                    //requestFocus(etSearch);
+                } else {
                     url = searchDeialogUrl + text;
                     web.hasEnteredFullscreen();
                     web.load(url, null);
-
                     dialog.dismiss();
                 }
             }
         });
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
     private void feedBackThisApp(String text, String subject) {
@@ -207,27 +296,30 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
+            Snackbar.make(bottomNavigationView, getResources().getString(R.string.error), Snackbar.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle(getResources().getString(R.string.exit_title))
-                .setMessage(getResources().getString(R.string.exit_warning))
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
-                    public void onClick(final DialogInterface arg0, final int arg1) {
-                        //эмулируем нажатие на HOME, сворачивая приложение
-                        final Intent i = new Intent(Intent.ACTION_MAIN);
-                        i.addCategory(Intent.CATEGORY_HOME);
-                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
+        this.doubleBackToExitPressedOnce = true;
 
-                    }
-                }).create().show();
+        Snackbar.make(bottomNavigationView,
+                getResources().getString(R.string.exit_double_tap),
+                Snackbar.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
     @Override
@@ -293,7 +385,8 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
 
             Log.d(TAG_WEB, "Load Failed:" + description);
 
-            Toast.makeText(getApplicationContext(), "Проверьте подключение к интернету", Toast.LENGTH_LONG).show();
+            Snackbar.make(getWindow().getDecorView().getRootView(), getResources().getString(R.string.internet_connection), Snackbar.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), getResources().getString(R.string.internet_connection), Toast.LENGTH_LONG).show();
 
             super.onReceivedLoadError(view, errorCode, description, failingUrl);
         }
