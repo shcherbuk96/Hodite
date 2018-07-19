@@ -27,7 +27,6 @@ public class SplashScreen extends AppCompatActivity implements Constants {
         }, Constants.WAIT);
     }
 
-
     private void checkMessages() {
         if (getIntent() == null || getIntent().getStringExtra("URL") == null) {
             // проверяем, первый ли раз открывается программа

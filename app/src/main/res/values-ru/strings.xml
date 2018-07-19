@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Hodite</string>
+
+    <string name="settings">Настройки</string>
+    <string name="comment">Обратная связь</string>
+    <string name="search">Поиск</string>
+
+    <string name="settings_website">Уведомления сайта</string>
+    <string name="settings_shop">Уведомления магазинов</string>
+    <string name="settings_summary_website">Получать уведомления об обновлениях сайта</string>
+    <string name="settings_summary_shop">Получать уведомления об акциях магазинов</string>
+
+    <string name="rate_title">Нравится Hodite?</string>
+    <string name="rate_message">Вам нравится пользоваться этим приложением? Оцените приложение.</string>
+    <string name="rate_yes">Оценить Hodite</string>
+    <string name="rate_later">Позже</string>
+    <string name="rate_no">Нет, спасибо</string>
+
+    <string name="search_dialog_hint">Введите запрос</string>
+    <string name="search_dialog_button">Найти</string>
+
+    <string name="feedback_title">Отзыв</string>
+    <string name="feedback_toast">Напишите отзыв</string>
+    <string name="feedback_email_client">Выберите email клиент :</string>
+    <string name="feedback_theme_hint">Тема сообщения</string>
+    <string name="feedback_message_hint">Ваше сообщение</string>
+    <string name="feedback_btn">Отправить</string>
+    <string name="feedback_social">Мы в социальных сетях</string>
+
+    <string name="error">Что-то пошло не по плану</string>
+    <string name="exit_title">Выход</string>
+    <string name="exit_warning">Вы уверены, что хотите выйти?</string>
+
+    <string name="search_title">Поиск</string>
+    <string name="search_btn">Поиск</string>
+</resources>

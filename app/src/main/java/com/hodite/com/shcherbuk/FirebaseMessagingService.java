@@ -20,7 +20,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         sp = getSharedPreferences(CHECK_SETTINGS,
                 Context.MODE_PRIVATE);
 
-
         if (remoteMessage.getData() == null) {
             sendNotification(remoteMessage.getNotification().getBody(), URL_HODITE_COM);
         }
@@ -28,32 +27,26 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         if (remoteMessage.getData() != null) {
             sendNotification(remoteMessage.getNotification().getBody(), remoteMessage.getData().get("URL"));
         }
-
     }
 
     private void sendNotification(final String body, final String url) {
         final Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra(KEY_INTENT, url);
-
         final PendingIntent pendingIntent = PendingIntent
                 .getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-
         final Notification.Builder builder = new Notification.Builder(this);
 
         builder.setContentIntent(pendingIntent)
                 .setWhen(System.currentTimeMillis()) //Время уведомления
                 .setSmallIcon(R.mipmap.ico)
-                .setContentTitle("Hodite")
+                .setContentTitle(getResources().getString(R.string.app_name))
                 .setContentText(body); // Текст уведомления
 
         final Notification notification = builder.build();
         notification.defaults = Notification.DEFAULT_SOUND |
                 Notification.DEFAULT_VIBRATE;
-
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         final NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         nm.notify((body + url).hashCode(), notification);
     }
-
-
 }
