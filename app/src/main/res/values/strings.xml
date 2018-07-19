@@ -30,8 +30,11 @@
     <string name="error">Something is wrong</string>
     <string name="exit_title">Exit</string>
     <string name="exit_warning">Are you sure you want to get out?</string>
+    <string name="exit_double_tap">Please click "Back" again to exit</string>
 
     <string name="search_title">Search</string>
     <string name="search_btn">Search</string>
+
+    <string name="internet_connection">Check internet connection</string>
 
 </resources>

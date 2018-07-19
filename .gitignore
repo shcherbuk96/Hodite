@@ -3,12 +3,14 @@
 *.iml
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 
-# Log Files
-*.log

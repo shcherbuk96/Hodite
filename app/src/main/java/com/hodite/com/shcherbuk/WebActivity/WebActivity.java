@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +44,7 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
     private XWalkView web;
     private String url;
     private ImageView refresh;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -158,7 +161,10 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
                 if (!etFeedback.getText().toString().isEmpty()) {
                     feedBackThisApp(etFeedback.getText().toString(), etSubject.getText().toString());
                 } else
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.feedback_toast), Toast.LENGTH_SHORT).show();
+                    Snackbar.make(bottomNavigationView,
+                            getResources().getString(R.string.feedback_toast),
+                            Snackbar.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), getResources().getString(R.string.feedback_toast), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -184,8 +190,11 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
                     url = searchDeialogUrl + text;
                     web.hasEnteredFullscreen();
                     web.load(url, null);
-
                     dialog.dismiss();
+                } else{
+                    Snackbar.make(bottomNavigationView,
+                            getResources().getString(R.string.search_dialog_hint),
+                            Snackbar.LENGTH_SHORT).show();
                 }
             }
         });
@@ -207,27 +216,30 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Toast.makeText(this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
+            Snackbar.make(bottomNavigationView, getResources().getString(R.string.error), Snackbar.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle(getResources().getString(R.string.exit_title))
-                .setMessage(getResources().getString(R.string.exit_warning))
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
-                    public void onClick(final DialogInterface arg0, final int arg1) {
-                        //эмулируем нажатие на HOME, сворачивая приложение
-                        final Intent i = new Intent(Intent.ACTION_MAIN);
-                        i.addCategory(Intent.CATEGORY_HOME);
-                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
+        this.doubleBackToExitPressedOnce = true;
 
-                    }
-                }).create().show();
+        Snackbar.make(bottomNavigationView,
+                getResources().getString(R.string.exit_double_tap),
+                Snackbar.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
     @Override
@@ -293,7 +305,8 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
 
             Log.d(TAG_WEB, "Load Failed:" + description);
 
-            Toast.makeText(getApplicationContext(), "Проверьте подключение к интернету", Toast.LENGTH_LONG).show();
+            Snackbar.make(getWindow().getDecorView().getRootView(), getResources().getString(R.string.internet_connection),Snackbar.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), getResources().getString(R.string.internet_connection), Toast.LENGTH_LONG).show();
 
             super.onReceivedLoadError(view, errorCode, description, failingUrl);
         }
