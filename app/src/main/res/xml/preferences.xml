@@ -1,17 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/settings">
+    <PreferenceCategory android:title="@string/settings_notification_category">
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="settings_website"
-            android:summary="@string/settings_summary_website"
-            android:title="@string/settings_website" />
+            android:summary="@string/settings_website_summary"
+            android:title="@string/settings_website_title" />
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="settings_shop"
-            android:summary="@string/settings_summary_shop"
-            android:title="@string/settings_shop" />
+            android:summary="@string/settings_shop_summary"
+            android:title="@string/settings_shop_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_about_category">
+
+        <Preference
+            android:selectable="false"
+            android:summary="@string/settings_about_summary" />
+
+        <Preference
+            android:summary="@string/settings_version_summary"
+            android:title="@string/settings_version_title" />
+
+        <Preference
+            android:key="@string/key_send_feedback"
+            android:summary="@string/settings_feedback_summary"
+            android:title="@string/settings_feedback_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_social_category">
+
+        <Preference
+            android:icon="@drawable/vk"
+            android:title="@string/settings_vk_title">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/settings_vk_url" />
+        </Preference>
+
+        <Preference
+            android:icon="@drawable/instagram"
+            android:title="@string/settings_instagram_title">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/settings_instagram_url" />
+        </Preference>
+
+        <Preference
+            android:icon="@drawable/youtube"
+            android:title="@string/settings_youtube_title">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/settings_youtube_url" />
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

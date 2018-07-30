@@ -5,10 +5,29 @@
     <string name="comment">Обратная связь</string>
     <string name="search">Поиск</string>
 
-    <string name="settings_website">Уведомления сайта</string>
-    <string name="settings_shop">Уведомления магазинов</string>
-    <string name="settings_summary_website">Получать уведомления об обновлениях сайта</string>
-    <string name="settings_summary_shop">Получать уведомления об акциях магазинов</string>
+    <string name="settings_notification_category">Уведомления</string>
+    <string name="settings_website_title">Уведомления сайта</string>
+    <string name="settings_shop_title">Уведомления магазинов</string>
+    <string name="settings_website_summary">Получать уведомления об обновлениях сайта</string>
+    <string name="settings_shop_summary">Получать уведомления об акциях магазинов</string>
+
+    <string name="settings_about_category">О нас</string>
+    <string name="settings_about_summary">Амбициозный проект молодой компании ООО «Ходите» - это ресурс, который позволяет оценить красоту и масштабы города с высоты птичьего полета. Вы увидите все районы и улицы города, а также месторасположение основных общественно значимых объектов.</string>
+    <string name="settings_version_title">Версия</string>
+    <string name="settings_version_summary">0.0.4</string>
+    <string name="settings_feedback_title">Отправить отзыв</string>
+    <string name="settings_feedback_summary">Есть вопросы? Будем рады помочь!</string>
+
+    <string name="settings_social_category">Мы в социальных сетях</string>
+    <string name="settings_vk_title">VK</string>
+    <string name="settings_vk_url">https://vk.com/hodite</string>
+    <string name="settings_instagram_title">Instagram</string>
+    <string name="settings_instagram_url">https://www.instagram.com/hodite_com/</string>
+    <string name="settings_youtube_title">YouTube</string>
+    <string name="settings_youtube_url">https://www.youtube.com/channel/UCLbVj3u1NYj045AuBpHIfyw</string>
+
+    <string name="key_send_feedback">key_send_feedback</string>
+    <string name="hodite_email">hodite.com@gmail.com</string>
 
     <string name="rate_title">Нравится Hodite?</string>
     <string name="rate_message">Вам нравится пользоваться этим приложением? Оцените приложение.</string>
@@ -18,14 +37,6 @@
 
     <string name="search_dialog_hint">Ваш запрос</string>
     <string name="search_dialog_button">Найти</string>
-
-    <string name="feedback_title">Отзыв</string>
-    <string name="feedback_toast">Напишите отзыв</string>
-    <string name="feedback_email_client">Выберите email клиент :</string>
-    <string name="feedback_theme_hint">Тема сообщения</string>
-    <string name="feedback_message_hint">Ваше сообщение</string>
-    <string name="feedback_btn">Отправить</string>
-    <string name="feedback_social">Мы в социальных сетях</string>
 
     <string name="error">Что-то пошло не по плану</string>
     <string name="exit_title">Выход</string>
@@ -40,4 +51,7 @@
     <string name="err_feedback_message">Введите сообщение</string>
     <string name="err_feedback_theme">Введите тему сообщения</string>
     <string name="err_search_query">Введите запрос</string>
+
+    <string name="feedback_email_client">Выберите email клиент :</string>
+
 </resources>

@@ -5,10 +5,29 @@
     <string name="comment">Feedback</string>
     <string name="search">Search</string>
 
-    <string name="settings_website">Web-Site notifications</string>
-    <string name="settings_shop">Shop notifications</string>
-    <string name="settings_summary_website">Notifications about web-site updates</string>
-    <string name="settings_summary_shop">Notifications about store shares</string>
+    <string name="settings_notification_category">Notifications</string>
+    <string name="settings_website_title">Web-Site notifications</string>
+    <string name="settings_shop_title">Shop notifications</string>
+    <string name="settings_website_summary">Notifications about web-site updates</string>
+    <string name="settings_shop_summary">Notifications about store shares</string>
+
+    <string name="settings_about_category">About</string>
+    <string name="settings_about_summary">Ambitious project of a young company "Hodite" - is a resource, which allows to assess a beauty and scale of a city from a birds eye view. You will see all districts and streets of a city and also a location of the main sights.</string>
+    <string name="settings_version_title">Version</string>
+    <string name="settings_version_summary">0.0.4</string>
+    <string name="settings_feedback_title">Send FeedBack</string>
+    <string name="settings_feedback_summary">Got any queries? We are happy to help!</string>
+
+    <string name="settings_social_category">We in social networks</string>
+    <string name="settings_vk_title">VK</string>
+    <string name="settings_vk_url">https://vk.com/hodite</string>
+    <string name="settings_instagram_title">Instagram</string>
+    <string name="settings_instagram_url">https://www.instagram.com/hodite_com/</string>
+    <string name="settings_youtube_title">YouTube</string>
+    <string name="settings_youtube_url">https://www.youtube.com/channel/UCLbVj3u1NYj045AuBpHIfyw</string>
+
+    <string name="key_send_feedback">key_send_feedback</string>
+    <string name="hodite_email">hodite.com@gmail.com</string>
 
     <string name="rate_title">Do you like Hodite?</string>
     <string name="rate_message">Do you like using the app? Assess it.</string>
@@ -18,14 +37,6 @@
 
     <string name="search_dialog_hint">Your query</string>
     <string name="search_dialog_button">Search</string>
-
-    <string name="feedback_title">Feedback</string>
-    <string name="feedback_toast">Write a comment</string>
-    <string name="feedback_email_client">Choose an email client :</string>
-    <string name="feedback_theme_hint">Conversation topic</string>
-    <string name="feedback_message_hint">Your message</string>
-    <string name="feedback_btn">Send</string>
-    <string name="feedback_social">We in social networks</string>
 
     <string name="error">Something is wrong</string>
     <string name="exit_title">Exit</string>
@@ -40,4 +51,7 @@
     <string name="err_feedback_message">Enter your message</string>
     <string name="err_feedback_theme">Enter message topic</string>
     <string name="err_search_query">Type a query</string>
+
+    <string name="feedback_email_client">Choose an email client :</string>
+
 </resources>

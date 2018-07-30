@@ -2,6 +2,7 @@ package com.hodite.com.shcherbuk.WebActivity;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -83,11 +84,6 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
             public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
 
                 switch (item.getItemId()) {
-                    case R.id.feedback:
-                        feedBackAlertDialog();
-
-                        break;
-
                     case R.id.settings:
                         ActivityManager.startSettingsActivity(bottomNavigationView.getContext());
 
@@ -118,109 +114,6 @@ public class WebActivity extends AppCompatActivity implements Constants, SharedP
         web.load(url, null);
     }
 
-    private void feedBackAlertDialog() {
-
-        final AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(getResources().getString(R.string.feedback_title))
-                .create();
-
-        LayoutInflater inflater = this.getLayoutInflater();
-        dialog.setView(inflater.inflate(R.layout.feedback, null));
-        dialog.show();
-
-        etFeedback = dialog.findViewById(R.id.etFeedback);
-        etSubject = dialog.findViewById(R.id.etTopic);
-        btnSubmit = dialog.findViewById(R.id.btnSubmit);
-
-        final TextInputLayout etFeedbackLayout = dialog.findViewById(R.id.etFeedbackLayout);
-        final TextInputLayout etTopicLayout = dialog.findViewById(R.id.etTopicLayout);
-
-        final ImageView vk = dialog.findViewById(R.id.vk);
-        final ImageView youtube = dialog.findViewById(R.id.youtube);
-        final ImageView instagram = dialog.findViewById(R.id.instagram);
-
-        etFeedback.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                if (s.toString().trim().isEmpty()) {
-                    etFeedbackLayout.setError(getString(R.string.err_feedback_message));
-                } else {
-                    etFeedbackLayout.setErrorEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(final Editable s) {
-
-            }
-        });
-
-        etSubject.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                if (s.toString().trim().isEmpty()) {
-                    etTopicLayout.setError(getString(R.string.err_feedback_theme));
-                } else {
-                    etTopicLayout.setErrorEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(final Editable s) {
-
-            }
-        });
-
-        vk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                socialNetwork(vkUrl);
-            }
-        });
-
-        youtube.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                socialNetwork(youtubeUrl);
-            }
-        });
-
-        instagram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                socialNetwork(instagramUrl);
-            }
-        });
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                if (etFeedback.getText().toString().trim().isEmpty()) {
-                    etFeedbackLayout.setError(getString(R.string.err_feedback_message));
-                    //requestFocus(etFeedback);
-                }
-
-                if (etSubject.getText().toString().trim().isEmpty()) {
-                    etTopicLayout.setError(getString(R.string.err_feedback_theme));
-                    //requestFocus(etSubject);
-                }
-
-                if (!etFeedback.getText().toString().trim().isEmpty() && !etSubject.getText().toString().trim().isEmpty()) {
-                    feedBackThisApp(etFeedback.getText().toString(), etSubject.getText().toString());
-                }
-            }
-        });
-    }
 
     private void searchAlertDialog() {
         final AlertDialog dialog = new AlertDialog.Builder(this)
